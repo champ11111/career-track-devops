@@ -53,5 +53,5 @@ docker compose down
 This will stop and remove the containers, but the data volumes (e.g., MySQL data, MongoDB data) will be preserved. If you want to remove the volumes as well, use the --volumes flag:
 
 ```
-docker-compose down --volumes
+docker compose down --volumes
 ```
