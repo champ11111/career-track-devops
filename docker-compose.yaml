@@ -1,0 +1,42 @@
+version: '3.3'
+
+networks:
+  my-network:
+    driver: bridge
+
+services:
+  user-service:
+    build: users-service
+    ports:
+      - 3000:3000
+    depends_on:
+      - users-db
+    environment:
+      - ENV=prod
+
+  users-db:
+    build: users-db
+    volumes:
+      - mysql-storage:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  product-service:
+    build: products-service
+    ports:
+      - 3001:3001
+    depends_on:
+      - products-db
+    environment:
+      - ENV=prod
+
+  products-db:
+    build: products-db
+    volumes:
+      - mongo-storage:/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  mysql-storage:
+  mongo-storage:
